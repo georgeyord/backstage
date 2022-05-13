@@ -96,7 +96,7 @@ export const useTechDocsReaderDom = (
         sidebar.style.top = `${newTop}px`;
       }
       // Show the sidebar only after updating its position
-      sidebar.style.removeProperty('opacity');
+      sidebar.style.setProperty('opacity', '1');
     });
   }, [dom, sidebars]);
 
@@ -727,16 +727,21 @@ export const useTechDocsReaderDom = (
           docStorageUrl: await techdocsStorageApi.getApiOrigin(),
           onLoading: (renderedElement: Element) => {
             (renderedElement as HTMLElement).style.setProperty('opacity', '0');
+            (renderedElement as HTMLElement).style.setProperty(
+              'transition',
+              'opacity 450ms linear 250ms',
+            );
             const renderedSidebars = Array.from(
               renderedElement.querySelectorAll<HTMLElement>('.md-sidebar'),
             );
             // Hide sidebars until your position is updated
             for (const sidebar of renderedSidebars) {
               sidebar.style.setProperty('opacity', '0');
+              // sidebar.style.setProperty('transition', 'all 450ms linear');
             }
           },
           onLoaded: (renderedElement: Element) => {
-            (renderedElement as HTMLElement).style.removeProperty('opacity');
+            (renderedElement as HTMLElement).style.setProperty('opacity', '1');
             // disable MkDocs drawer toggling ('for' attribute => checkbox mechanism)
             renderedElement
               .querySelector('.md-nav__title')
