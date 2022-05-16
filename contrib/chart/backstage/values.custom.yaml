@@ -1,0 +1,26 @@
+# https://github.com/backstage/backstage/blob/master/contrib/chart/backstage/values.yaml
+
+frontend:
+  enabled: true
+
+lighthouse:
+  enabled: false
+
+postgresql:
+  enabled: true
+  service:
+    port: 5432
+
+appConfig:
+  app:
+    baseUrl: https://backstage.minikube.internal.31.lan
+    title: Minikube Backstage
+  backend:
+    baseUrl: https://backstage.minikube.internal.31.lan
+    cors:
+      origin: https://backstage.minikube.internal.31.lan
+  lighthouse:
+    baseUrl: https://backstage.minikube.internal.31.lan/lighthouse-api
+  techdocs:
+    storageUrl: https://backstage.minikube.internal.31.lan/api/techdocs/static/docs
+    requestUrl: https://backstage.minikube.internal.31.lan/api/techdocs
